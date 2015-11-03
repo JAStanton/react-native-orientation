@@ -3,8 +3,6 @@
 //
 
 #import "Orientation.h"
-#import "AppDelegate.h"
-
 
 @implementation AppDelegate (Orientation)
 
@@ -97,6 +95,7 @@ RCT_EXPORT_METHOD(lockToPortrait)
 {
   NSLog(@"Locked to Portrait");
   [Orientation setOrientation:1];
+  [UIViewController attemptRotationToDeviceOrientation];
 //  AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 //  delegate.orientation = 1;
 
@@ -106,6 +105,7 @@ RCT_EXPORT_METHOD(lockToLandscape)
 {
   NSLog(@"Locked to Landscape");
   [Orientation setOrientation:2];
+  [UIViewController attemptRotationToDeviceOrientation];
 //  AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 //  delegate.orientation = 2;
 
@@ -115,6 +115,7 @@ RCT_EXPORT_METHOD(unlockAllOrientations)
 {
   NSLog(@"Unlock All Orientations");
   [Orientation setOrientation:3];
+  [UIViewController attemptRotationToDeviceOrientation];
 //  AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 //  delegate.orientation = 3;
 
