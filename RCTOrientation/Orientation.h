@@ -1,7 +1,3 @@
-//
-//  Orientation.h
-//
-
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "RCTBridgeModule.h"
@@ -11,7 +7,7 @@
 
 @interface Orientation : NSObject<RCTBridgeModule>
 + (void)setOrientation:(UIInterfaceOrientation)orientation;
-+ (UIInterfaceOrientation)getOrientation;
++ (UIInterfaceOrientation)orientation;
 @end
 
 @interface AppDelegate (Orientation)

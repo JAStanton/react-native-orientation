@@ -4,7 +4,7 @@
 
 - (NSUInteger)application:(UIApplication *)application
     supportedInterfaceOrientationsForWindow:(UIWindow *)window {
-  UIInterfaceOrientation orientation = [Orientation getOrientation];
+  UIInterfaceOrientation orientation = [Orientation orientation];
   switch (orientation) {
     case UIInterfaceOrientationPortrait:
       return UIInterfaceOrientationMaskPortrait;
@@ -25,9 +25,15 @@ static int _orientation = UIInterfaceOrientationPortrait;
 
 + (void)setOrientation:(UIInterfaceOrientation)orientation {
   _orientation = orientation;
+
+  dispatch_async(dispatch_get_main_queue(), ^{
+    NSNumber *value = [NSNumber numberWithInt:orientation];
+    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+    [UIViewController attemptRotationToDeviceOrientation];
+  });
 }
 
-+ (UIInterfaceOrientation)getOrientation {
++ (UIInterfaceOrientation)orientation {
   return _orientation;
 }
 
@@ -81,24 +87,11 @@ RCT_EXPORT_MODULE();
 RCT_EXPORT_METHOD(lockToPortrait) {
   NSLog(@"Locked to Portrait");
   [Orientation setOrientation:UIInterfaceOrientationPortrait];
-
-  dispatch_async(dispatch_get_main_queue(), ^{
-    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
-    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
-    [UIViewController attemptRotationToDeviceOrientation];
-  });
 }
 
 RCT_EXPORT_METHOD(lockToLandscape) {
   NSLog(@"Locked to Landscape");
   [Orientation setOrientation:UIInterfaceOrientationLandscapeLeft];
-
-  dispatch_async(dispatch_get_main_queue(), ^{
-    NSNumber *value =
-        [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
-    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
-    [UIViewController attemptRotationToDeviceOrientation];
-  });
 }
 
 @end
