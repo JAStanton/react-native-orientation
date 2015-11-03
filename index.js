@@ -11,9 +11,6 @@ module.exports = {
   lockToLandscape() {
     Orientation.lockToLandscape();
   },
-  unlockAllOrientations() {
-    Orientation.unlockAllOrientations();
-  },
   addOrientationListener(cb) {
     listeners[cb] = DeviceEventEmitter.addListener(deviceEvent,
       (body) => {
