@@ -29,10 +29,28 @@
 {
 
   UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
-  NSString *orientationStr = [self getOrientationStr:orientation];
 
   [self.bridge.eventDispatcher sendDeviceEventWithName:@"orientationDidChange"
                                               body:@{@"orientation": orientationStr}];
+}
+
+- (NSString *)getOrientationStr: (UIDeviceOrientation)orientation {
+  NSString *orientationStr;
+  switch (orientation) {
+    case UIDeviceOrientationPortrait:
+    case UIDeviceOrientationPortraitUpsideDown:
+      orientationStr = @"PORTRAIT";
+      break;
+    case UIDeviceOrientationLandscapeLeft:
+    case UIDeviceOrientationLandscapeRight:
+
+      orientationStr = @"LANDSCAPE";
+      break;
+    default:
+      orientationStr = @"UNKNOWN";
+      break;
+  }
+  return orientationStr;
 }
 
 RCT_EXPORT_MODULE()
