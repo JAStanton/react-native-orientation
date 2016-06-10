@@ -1,22 +1,5 @@
 #import "Orientation.h"
 
-@implementation AppDelegate (Orientation)
-
-- (NSUInteger)application:(UIApplication *)application
-    supportedInterfaceOrientationsForWindow:(UIWindow *)window {
-  UIInterfaceOrientation orientation = [Orientation orientation];
-  switch (orientation) {
-    case UIInterfaceOrientationPortrait:
-      return UIInterfaceOrientationMaskPortrait;
-    case UIInterfaceOrientationLandscapeLeft:
-      return UIInterfaceOrientationMaskLandscape;
-    default:
-      return UIInterfaceOrientationMaskPortrait;
-  }
-}
-
-@end
-
 @implementation Orientation
 
 @synthesize bridge = _bridge;
